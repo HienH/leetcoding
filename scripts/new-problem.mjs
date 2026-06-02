@@ -28,10 +28,7 @@ if (existsSync(problemPath) || existsSync(testPath)) {
 }
 
 const render = (tmpl) =>
-  tmpl
-    .replaceAll("{{TITLE}}", title)
-    .replaceAll("{{FN}}", fn)
-    .replaceAll("{{SLUG}}", slug);
+  tmpl.replaceAll("{{TITLE}}", title).replaceAll("{{FN}}", fn).replaceAll("{{SLUG}}", slug);
 
 const problemTmpl = readFileSync(join(root, "templates", "problem.ts.tmpl"), "utf8");
 const testTmpl = readFileSync(join(root, "templates", "problem.test.ts.tmpl"), "utf8");
