@@ -3,12 +3,18 @@
 // Given an n x n grid of 0s (open) and 1s (blocked), return the length of
 // the shortest "clear path" from the top-left (0,0) to the bottom-right
 // (n-1, n-1). A clear path is a sequence of cells such that:
+
+
+
+
 //   - every cell is 0
 //   - every consecutive pair of cells is 8-directionally adjacent
 //     (up, down, left, right, OR any of the 4 diagonals)
 //
 // The length of the path is the number of cells visited (NOT the number
 // of moves). So a single-cell path has length 1.
+
+
 //
 // Return -1 if no clear path exists.
 //
@@ -37,5 +43,46 @@
 
 export function shortestPathBinaryMatrix(grid: number[][]): number {
   // TODO
+
+const movements = [[1,0],[-1,0],[0,1],[0,-1],[-1,1],[1,1],[1,-1],[-1,-1]]     
+
+const endX = grid.length-1
+const endY = grid[0].length-1
+
+
+if(grid[0][0] === 1 || grid[endX][endY]===1) return -1
+
+const queue = [[0,0]]
+
+let cellsvisited = 1
+while(queue.length>0){
+  const layer = queue.length // snapshot
+
+  for(let i =0; i<layer;i++){
+    const [x,y] = queue.shift()
+
+    if(x === endX && y === endY) return cellsvisited
+
+
+    for(const [nx, ny] of movements){
+      const newX= x+nx
+      const newY= y+ny
+
+
+      if(newX>=0 && newX< grid.length && newY >=0 && newY<grid[0].length && grid[newX][newY]===0){
+        
+      grid[newX][newY] =1
+      queue.push([newX,newY])
+
+      }
+
+    }
+
+  }
+    cellsvisited+=1
+
+}
+
+
   return -1;
 }
